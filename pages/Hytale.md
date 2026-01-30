@@ -49,7 +49,7 @@ By default, LuckPerms will delegate permission checks for non-Player entities to
 
 LuckPerms has a built-in chat formatter that is enabled by default (see below for more info). If you want to use LuckPerms prefixes or suffixes in chat messages, we recommend that you leave it enabled and disable chat formatting functionality in any other mods you may have installed. :)
 
-### Finding permissions / troubleshooting
+### Finding permissions and troubleshooting
 
 If you don't know the permissions associated with a given command or feature, use the LuckPerms verbose feature! See the [Verbose](Verbose) wiki page for details.
 
