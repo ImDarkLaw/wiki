@@ -1,9 +1,11 @@
 
-There is an **early beta** version of **LuckPerms for [Hytale](https://hytale.com/)** available from our [downloads page](https://luckperms.net/download). This is the same LuckPerms you know and (maybe/hopefully) love from Minecraft, ported across and integrated with Hytale! 🎉
+There is an **beta** version of **LuckPerms for [Hytale](https://hytale.com/)** available from our [downloads page](https://luckperms.net/download). This is the same LuckPerms you know and (maybe/hopefully) love from Minecraft, ported across and integrated with Hytale! 🎉
 
-At time of writing, it is still very early days and a lot of things are unknown and uncertain. Hytale has quite a lot of modding capability, but there is a limited amount of official documentation and guidance.
+LuckPerms for Hytale is built on top of the same common codebase as the other LuckPerms plugin/mods. We believe that basing the Hytale version of LuckPerms on top of the same established core platform as our existing **well-proven** Minecraft releases enables us to provide a very **stable** and **performant** permissions implementation for Hytale, to a higher quality than "bespoke" plugins could. 🥳
 
-LuckPerms for Hytale is built on top of the same common codebase as the other LuckPerms plugin/mods, but its integration with the server is not as stable. **You have been warned! There will be bugs! 🐞** However, we believe that basing the Hytale version of LuckPerms on top of the same core code as the well-proven Minecraft versions should enable us to make things very stable, quite quickly!
+Some of the documentation here on the wiki and elsewhere in the project is lagging behind slightly and still references Minecraft in a few places. However, thankfully the permissions system in Hytale is very similar to the "Bukkit" system that most of the Minecraft ecosystem has adopted, so most if not all of the existing concepts in LuckPerms for Minecraft apply in Hytale too! Yay!
+
+We hope you enjoy using LuckPerms on your Hytale servers!
 
 ## FAQs
 
@@ -17,14 +19,14 @@ LuckPerms for Hytale is built on top of the same common codebase as the other Lu
 
 ### I've never used LuckPerms before! How do I get started?
 
-Hello and welcome!
+Hello and welcome! 👋
 
-There is lots of useful information here on the wiki. Thankfully, the Hytale edition of LuckPerms behaves mostly the same as the Minecraft editions, so everything that has been written before is still relevant. Yay!
+The short answer is, check out the:
 
-If you've never used a permissions plugin before, we suggest you just start at the top and work your way down!
+* **[Installation](Installation)** page to learn how to install LuckPerms, then the
+* **[Getting Started](Usage)** page for how to start using it!
 
-* The basics of permissions are covered in detail in the [Getting Started](Usage) page.
-* A more to the point command reference can be found in the [Command Usage](Command-Usage) subpages.
+After that, if you've never used a permissions plugin before and want to find out more, we suggest you just start at the top and work your way down! A more to the point command reference can be found in the [Command Usage](Command-Usage) subpages.
 
 ### OP doesn't work anymore!
 
@@ -43,7 +45,7 @@ If you want to replicate OP-like functionality (full access to **all** commands,
 
 ### Compatibility with other mods/plugins
 
-LuckPerms attempts to maintain compatibility with other mods checking permissions via `CommandSender#hasPermission` or `PermissionsModule#hasPermission`, but the other methods in `PermissionsModule` probably will not work as you expect.
+LuckPerms aims to maintain compatibility with other mods checking permissions via `CommandSender#hasPermission` or `PermissionsModule#hasPermission`. If you other mods check for permissions this way, everything should work absolutely fine!
 
 By default, LuckPerms will delegate permission checks for non-Player entities to the built-in Hytale permissions system. This means that you *can* use the built-in `/perm` commands to configure permissions for **non-Player** NPCs, "service accounts", or the Nitrado "anonymous" user. Player permissions **must** be configured through LuckPerms.
 
@@ -169,11 +171,6 @@ CachedMetaData metaData = playerAdapter.getMetaData(playerRef);
 String prefix = metaData.getPrefix();
 ```
 
-
-### Known caveats/issues
-
-Known caveats/issues are listed on the [Hytale pull request in the LuckPerms GitHub repo](https://github.com/LuckPerms/LuckPerms/pull/4213). If you're having issues or notice something missing, please check there to see if it's already known about and being worked on. :)
-
 ### Other
 
-Please come and chat with us in [Discord](https://discord.gg/luckperms) for help. There is a dedicated channel for Hytale questions.
+Please come and chat with us in [Discord](https://discord.gg/luckperms) for help. There is a dedicated channel for Hytale questions :)

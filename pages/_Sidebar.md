@@ -4,6 +4,7 @@
 * [**Storage**](Storage-types)
 * [**Configuration**](Configuration)
 * [**FAQ**](FAQ)
+* [**Hytale**](Hytale)
 * [**Command Usage**](Command-Usage)
   * [General](General-Commands)
   * [User](User-Commands)
@@ -45,12 +46,11 @@
 
 ### Reference
 
-* [**Upgrading from v4 to v5**](Upgrading-from-v4-to-v5)
-* [**Migrating from GM or PEX**](Migrating-from-GroupManager-or-PermissionsEx)
 * [**How permission calculation works**](Advanced-Setup)
 * [**Web Editor Technical Details**](Web-Editor-Technical-Details)
 * [**Self hosting the web interfaces**](Self-hosting-the-web-interfaces)
-* [**Hytale**](Hytale)
+* [**Upgrading from v4 to v5**](Upgrading-from-v4-to-v5)
+* [**Migrating from GM or PEX**](Migrating-from-GroupManager-or-PermissionsEx)
 
 ### Project Info
 

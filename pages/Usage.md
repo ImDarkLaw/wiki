@@ -1,11 +1,21 @@
-This guide is intended for people who have never used a permissions plugin before. If you're familiar with the concept, and think you'll be able to understand things just from reading the command usages, we suggest you read the page on [Command Usage and Permissions](Command-Usage), as this gives a much more "straight to the point" description of how the plugin works.
+### Contents
+* [Key Concepts](#key-concepts)
+* [Getting Started](#getting-started)
+  * [Granting full access to LuckPerms](#granting-full-access-to-luckperms)
+  * [Creating the first group](#creating-the-first-group)
+  * [Adding a user to a group](#adding-a-user-to-a-group)
+  * [Making a group inherit another group](#making-a-group-inherit-another-group)
+  * [Removing parent groups](#removing-parent-groups)
+  * [Finding Permissions](#finding-permissions)
+  * [Web Editor](#web-editor)
 
-If you're struggling to understand that, then this guide is a good place to start. :)
+If you're already familiar with what LuckPerms is and what it does, then feel free to skip directly to the [Command Usage and Permissions](Command-Usage) section, which is more of a quick reference.
 
+Otherwise, read on! To start with, let's go over some key concepts...
 
-# Key Definitions
+# Key Concepts
 ### Permission
-On your server, there will be certain **features, commands, and functionality** which exist. Some of these features will be included with the server, and others are added with “plugins”. Most of these actions **have a permission associated with them**, so you can control which users have access to each feature or command.
+On your server, there will be certain **features, commands, and functionality** which exist. Some of these features will be included with the server, and others are added with "plugins" or "mods". Most of these actions **have a permission associated with them**, so you can control which users have access to each feature or command.
 
 A **permission is just a string** (a sequence of letters/digits), and is separated into parts using periods. For example, “minecraft.command.ban” is the permission for Minecraft's /ban command.
 
@@ -22,23 +32,27 @@ Instead of assigning permissions to every user individually, we have **groups of
 For example, in my "admin" group, I might add permission to use the /ban and /unban commands, and then assign users to the admin group. This means that they will get all of the permissions from "admin", plus any they have themselves.
 
 ### Inheritance
-Users and groups are able to **inherit permissions from each other**. For example, by default, all users inherit permissions from the "default" group. You can setup your own groups and inheritances for your server, and make your own unique system.
+Users and groups are able to **inherit permissions from each other**. For example, by default, all users inherit permissions from the "**default**" group. You can setup your own groups and inheritances for your server, and make your own unique system.
 
 For example, I might have 3 groups, "default", "moderator" and "admin". I want moderator to inherit permissions from default, and admin to inherit permissions from moderator.
+
+![](../img/usage-inheritance-1.png)
+
+In the example above, the user "Bob" inherits from the "admin" group, which in turn inherits from "moderator" and so on. In LuckPerms, when a user/group inherits from another group, we call that group a "**parent**" group.
 
 ### Context
 A term that you will encounter quite often with LuckPerms is "context".
 
-**Context** in the most basic sense simply means the **circumstances where something will apply**.
+**Context** in the most basic sense simply means the **circumstances where something will apply**. For example, contexts allow you to grant users or groups permisions that only apply in certain servers, worlds, gamemodes, etc.
 
-Contexts are such a fundamental part of the plugin, they have their [very own wiki page](Context) dedicated to explaining their use.
+Contexts are such a fundamental part of the plugin, they have their [very own wiki page](Context) dedicated to explaining their use. :)
 
 # Getting Started
 If you haven't got LuckPerms installed just yet, please refer to the [installation guide](Installation) first.
 
 Then, please make sure you read the section about [choosing a Storage type](Storage-types) before proceeding. Whilst it is possible to change these options later, it's better to get them right the first time around.
 
-## Granting full access to modify permissions
+## Granting full access to LuckPerms
 The first thing you'll want to do is give yourself full access to the plugin. When LuckPerms is first installed, nobody has access to any of the LP commands.
 
 To do this, login to your server, and then open the server console.
@@ -48,7 +62,9 @@ Then, type `lp user <your username> permission set luckperms.* true`. (don't wor
 The result should look something like this:   
 ![](../img/usage-1.png)
 
-Effectively, what this command does, is give your account the `luckperms.*` permission. (or sets it to true for the user) You'll notice there's a `*` character at the end of the permission string. This character is called a wildcard, and gives a user access to **all** permissions which start with "luckperms".
+> If you're running an "integrated server" (the server is running inside your game client), you might not have a console to access, but that's ok! You should automatically have all permissions already.
+
+Effectively, what we've done there is give your user the `luckperms.*` permission. (or sets it to true for the user) You'll notice there's a `*` character at the end of the permission string. This character is called a wildcard, and gives a user access to **all** permissions which start with "luckperms".
 
 Now you've done this, you can either continue the setup process in-game, or keep typing commands into the console.
 
@@ -84,6 +100,8 @@ If I decide later that I don't want admin to have this permission anymore, I can
 
 ![](../img/usage-7.png)
 
+> The `minecraft.command.ban` permission is just an example, and if you're using a different platform (e.g. not a Minecraft server), the permission for the ban command will be different, but the concept is the same!
+
 ## Adding a user to a group
 Adding users to a group can be done with the "parent" command. (we just swap "permission" for "parent" in our command usage)
 
@@ -96,26 +114,24 @@ This command adds the user `Luck` to the `admin` group. This means that any perm
 ## Making a group inherit another group
 As well as users, groups are also able to inherit other groups.
 
-For example, suppose the following setup. (some of the permissions are just made up)
+For example, suppose the following setup. (the permissions are not real, just examples)
 
-| Admin | Mod | Default |
-|-------|-----|---------|
-| minecraft.command.ban | minecraft.command.mute | minecraft.command.say |
-| minecraft.command.pardon | minecraft.command.unmute | minecraft.command.me |
-| some.cool.admin.perm | some.cool.mod.perm | |
-| someplugin.vanish | chatcolor.bold | |
+| Admin       | Mod          | Default     |
+|-------------|--------------|-------------|
+| example.ban | example.mute | example.fly |
+|             |              | example.say |
 
-I want users in my admin group to also have access to mod and default permissions, and I want users in the mod group to have access to default's permissions.
+I want users in my `admin` group to also have access to `mod` and `default` permissions, and I want users in the `mod` group to have access to `default`'s permissions.
 
 To achieve this, I can setup the groups to inherit from each other.
 
-The command `lp group admin parent add mod` will make admin inherit all of mods permissions. I can then do the same for mod, and run `lp group mod parent add default`.
+The command `lp group admin parent add mod` will make admin inherit all of moderator's permissions. I can then do the same for mod, and run `lp group mod parent add default`.
 
 ![](../img/usage-9.png)
 
 The inheritance is recursive, so since although admin how only inherits directly from mod, mod inherits from default. This means admin has access to both the permissions in mod **and** default.
 
-A user in admin has access therefore to `minecraft.command.ban` and `minecraft.command.mute`, *and* `minecraft.command.say`.
+![](../img/usage-inheritance-1.png)
 
 ## Removing parent groups
 Removing parent groups is done with a spookily similar command.
@@ -123,3 +139,44 @@ Removing parent groups is done with a spookily similar command.
 To remove myself from admin, I'd just run `lp user Luck parent remove admin`.
 
 ![](../img/usage-10.png)
+
+## Finding permissions
+
+So far we have just been using made-up example permissions, but on your server, you'll want to use ones that actually relate to some functionality or ability, like a command.
+
+There's a couple of ways to find out what these are:
+
+* Look at **documentation** for your game server software
+* Look at **documentation** for your other plugins/mods
+* Use the **[`/lp verbose`](Verbose)** command!
+* Use **auto-complete** (either in commands or web editor)
+    * Note: The auto-complete list is not exhaustive! It is just the permissions LuckPerms has "seen" since the server started. If a permission isn't listed, you can still use it.
+
+### Verbose command
+
+The [Verbose](Verbose) command allows you (as the server admin) to monitor permission checks occurring in real time! This is the most reliable way to find permissions (and figure out why they aren't working as intended).
+
+Simplest usage:
+
+* Run `/lp verbose record <test user>` where `<test user>` is the name of the user who will run the command
+* Get the test user to run the command
+* Run `/lp verbose paste` to turn verbose mode off and generate a report of the permissions that were checked
+* Check the output to see which permissions were checked.
+
+Example:
+
+![](../img/whyluckperms-2.png)
+
+You can also use `/lp verbose on <test user>` to simply print the output to the chat/console, and `/lp verbose off` to turn it off after you're done. 
+
+More advanced usage is documented on the Verbose [wiki page](Verbose).
+
+## Web Editor
+
+Are commands too much typing for you?! LuckPerms has a fancy online [Web Editor](Web-Editor) which allows you to edit your permissions setup easily in an interactive web page.
+
+Just run `/lp editor` and follow the link to get started.
+
+![](../img/whyluckperms-1.png)
+
+More information can be found on this [wiki page](Web-Editor).
