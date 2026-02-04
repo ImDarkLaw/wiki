@@ -36,7 +36,9 @@ Users and groups are able to **inherit permissions from each other**. For exampl
 
 For example, I might have 3 groups, "default", "moderator" and "admin". I want moderator to inherit permissions from default, and admin to inherit permissions from moderator.
 
-![](../img/usage-inheritance-1.png)
+<p>
+  <img src="../img/usage-inheritance-1.png" height="800"/>
+</p>
 
 In the example above, the user "Bob" inherits from the "admin" group, which in turn inherits from "moderator" and so on. In LuckPerms, when a user/group inherits from another group, we call that group a "**parent**" group.
 
@@ -131,7 +133,9 @@ The command `lp group admin parent add mod` will make admin inherit all of moder
 
 The inheritance is recursive, so since although admin how only inherits directly from mod, mod inherits from default. This means admin has access to both the permissions in mod **and** default.
 
-![](../img/usage-inheritance-1.png)
+<p>
+  <img src="../img/usage-inheritance-1.png" height="800"/>
+</p>
 
 ## Removing parent groups
 Removing parent groups is done with a spookily similar command.
